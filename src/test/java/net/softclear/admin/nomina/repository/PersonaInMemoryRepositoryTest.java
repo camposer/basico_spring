@@ -9,28 +9,25 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
 
 @SpringBootTest
+@DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 public class PersonaInMemoryRepositoryTest {
     @Autowired
     private List<Persona> personasInterna;
 
     @Autowired
-    @Qualifier("personaInMemoryRepositoryForTest")
-    private PersonaInMemoryRepository repository;
+    private PersonaRepository repository;
 
     private final Persona persona1 = new Persona(1L, "Rodo", "Campos");
     private final Persona persona2 = new Persona(2L, "Kike", "Campos");
-
-    @BeforeEach
-    public void setup() {
-        personasInterna.clear();
-    }
 
     @Test // happy path
     public void getPersonas_sinElementos_returnsEmptyList() {
@@ -103,12 +100,14 @@ public class PersonaInMemoryRepositoryTest {
     static class Config {
         @Bean
         public List<Persona> personasInterna() {
+            // Otra opción: Retornar un mock de lista
+            // La opción actual utiliza fake object
             return new ArrayList<>();
         }
 
         @Bean
         // @Scope("singleton") => default
-        public PersonaInMemoryRepository personaInMemoryRepositoryForTest(
+        public PersonaRepository personaInMemoryRepositoryForTest(
                 List<Persona> personasInterna
         ) {
             return new PersonaInMemoryRepository(personasInterna);

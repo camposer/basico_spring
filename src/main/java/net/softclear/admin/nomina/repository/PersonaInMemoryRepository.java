@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PersonaInMemoryRepository {
+public class PersonaInMemoryRepository implements PersonaRepository {
     private List<Persona> personas;
 
     public PersonaInMemoryRepository(List<Persona> personas) {
@@ -19,19 +19,22 @@ public class PersonaInMemoryRepository {
         this(new ArrayList<>());
     }
 
+    @Override
     public List<Persona> getPersonas() {
         return personas;
     }
 
-
+    @Override
     public void agregarPersona(Persona persona) {
         personas.add(persona);
     }
 
+    @Override
     public void removerPersonaPorId(Long id) {
         personas.remove(getIndex(id));
     }
 
+    @Override
     public void actualizarPersona(Persona persona) {
         personas.set(getIndex(persona.getId()), persona);
     }
