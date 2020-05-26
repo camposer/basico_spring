@@ -26,22 +26,23 @@ public class NominaApplication implements CommandLineRunner {
 		System.out.println(esteNombreNoEsRelevante.saludar("Alejandro"));
 		System.out.println(applicationContext.getBean(HolaMundo.class).saludar("Alejandro"));
 	}
+
+	@Configuration
+	static class MyConfiguration {
+		@Bean
+		// Por defecto, el nombre del método es el nombre del bean
+		// Por defecto, todos los beans son singleton
+		public Saludar saludarIngles() {
+			return new SaludarIngles();
+		}
+
+		@Bean
+		public HolaMundo holaMundo(@Qualifier("saludarIngles") Saludar saludar) {
+			return new HolaMundo(saludar);
+		}
+	}
 }
 
-@Configuration
-class MyConfiguration {
-	@Bean
-	// Por defecto, el nombre del método es el nombre del bean
-	// Por defecto, todos los beans son singleton
-	public Saludar saludarIngles() {
-		return new SaludarIngles();
-	}
-
-	@Bean
-	public HolaMundo holaMundo(@Qualifier("saludarIngles") Saludar saludar) {
-		return new HolaMundo(saludar);
-	}
-}
 
 //@Component
 /**

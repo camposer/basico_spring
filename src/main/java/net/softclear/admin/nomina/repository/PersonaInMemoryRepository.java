@@ -2,12 +2,14 @@ package net.softclear.admin.nomina.repository;
 
 import net.softclear.admin.nomina.exception.PersonaNoEncontradaException;
 import net.softclear.admin.nomina.model.Persona;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@ConditionalOnMissingBean(PersonaDbRepository.class)
 public class PersonaInMemoryRepository implements PersonaRepository {
     private List<Persona> personas;
 

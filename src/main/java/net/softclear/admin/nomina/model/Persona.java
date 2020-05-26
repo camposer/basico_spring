@@ -1,11 +1,20 @@
 package net.softclear.admin.nomina.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Persona { // POJO -> Plain Old Java Object
+    @Id
+    //@GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String nombre;
     private String apellido;
+
+    public Persona() {}
 
     public Persona(Long id, String nombre, String apellido) {
         this.id = id;
@@ -50,5 +59,14 @@ public class Persona { // POJO -> Plain Old Java Object
     @Override
     public int hashCode() {
         return Objects.hash(id, nombre, apellido);
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                '}';
     }
 }
