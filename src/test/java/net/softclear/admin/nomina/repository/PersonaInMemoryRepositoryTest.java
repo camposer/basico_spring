@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 
 @SpringBootTest
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 public class PersonaInMemoryRepositoryTest {
     @Autowired
     private List<Persona> personasInterna;

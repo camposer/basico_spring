@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -40,6 +41,7 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
         PersonaDbRepositoryTest.Config.class
 })
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 //@Transactional // auto rollback después de cada test
 public class PersonaDbRepositoryTest {
     @Autowired

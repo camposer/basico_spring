@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +20,7 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 
 @SpringBootTest
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 public class PersonaServiceTest {
     @MockBean // crea un mock y mételo en el contexto como primary
     private PersonaRepository repository;

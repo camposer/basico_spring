@@ -17,6 +17,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +34,7 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 // 4. Controller -> Integration Tests (a veces con mocks) (CASI SIEMPRE)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 public class PersonaControllerTest {
     @LocalServerPort
     private int port;
